@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary to Decimal/Text Converter</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: larger;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #CDF5FD;
+    }
+
+    .converter {
+      background-color: #A0E9FF;
+      color: #000080;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    button {
+        font-family: 'Times New Roman', Times, serif;
+            padding: 10px 15px;
+            font-size:large;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #CDF5FD;
+            color: #000080;
+            margin-right: 5px;
+            width: 100px;
+         border-radius: 4px;
+         border: none;
+         text-align: center;
+         font-size: large;
+         padding:10px 15px;    
+         transition: all 0.5s;
+         cursor: pointer;
+         box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+    }
+
+    button{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+    button:hover {
+      padding-right: 24px;
+      padding-left: 8px;
+    }
+
+    button:after {
+        content: '»';
+  position: absolute;
+  opacity: 0;  
+  top: 9px;
+  right: -20px;
+  transition: 0.5s;
+    }
+
+    button:hover:after {
+      opacity: 1;
+      right: 10px;
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    .steps {
+      margin-top: 10px;
+      padding-left: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="converter">
+    <h2>Binary to Decimal</h2>
+    <input type="text" id="numberInput" placeholder="Enter binary value">
+    <button onclick="convertFromBinary()">Convert</button>
+    <button onclick="resetFields()">Reset</button>
+    <div class="result" id="result"></div>
+    <div class="steps" id="steps"></div>
+  </div>
+
+  <script>
+    function convertFromBinary() {
+      const input = document.getElementById("numberInput").value.trim();
+      let resultDiv = document.getElementById("result");
+      let stepsDiv = document.getElementById("steps");
+
+      if (!input) {
+        resultDiv.textContent = "Please enter a binary input.";
+        stepsDiv.innerHTML = "";
+        return;
+      }
+
+      let binaryGroups = input.split(' ');
+      let result = "";
+      let steps = [];
+
+      if (binaryGroups.every(group => /^[01]{8}$/.test(group))) {
+        // Convert binary groups to text
+        for (let binary of binaryGroups) {
+          let charCode = parseInt(binary, 2);
+          result += String.fromCharCode(charCode);
+          steps.push(`Binary '${binary}' to ASCII ${charCode}, Character: '${String.fromCharCode(charCode)}'`);
+        }
+      } else if (/^[01]+$/.test(input)) {
+        // Convert single binary number to decimal
+        let decimalValue = parseInt(input, 2);
+        result = decimalValue.toString();
+        
+        // Show steps for binary to decimal conversion
+        steps.push(`Binary '${input}' to Decimal Conversion:`);
+        let binaryStr = input;
+        let decimal = 0;
+        let binaryArray = binaryStr.split('').reverse();
+        for (let i = 0; i < binaryArray.length; i++) {
+          if (binaryArray[i] === '1') {
+            let powerOfTwo = Math.pow(2, i);
+            decimal += powerOfTwo;
+            steps.push(`2^${i} = ${powerOfTwo}`);
+          }
+        }
+        steps.push(`Sum of powers of 2: ${decimal}`);
+      } else {
+        resultDiv.textContent = "Please enter a valid binary input.";
+        stepsDiv.innerHTML = "";
+        return;
+      }
+
+      resultDiv.textContent = `Converted: ${result}`;
+      stepsDiv.innerHTML = steps.map(step => `<li>${step}</li>`).join("");
+    }
+
+    function resetFields() {
+      document.getElementById("numberInput").value = "";
+      document.getElementById("result").textContent = "";
+      document.getElementById("steps").innerHTML = "";
+    }
+  </script>
+</body>
+</html>

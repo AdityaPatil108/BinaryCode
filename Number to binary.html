@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link src="C:\Users\ap177\OneDrive\Desktop\RakshaBandhan\git.jpg">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal and Text to Binary Converter</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color:#CDF5FD;
+        }
+        .converter {
+            background-color: #A0E9FF;
+            color: #000080;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        button {
+            font-family: 'Times New Roman', Times, serif;
+            padding: 10px 15px;
+            font-size:large;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #CDF5FD;
+            color: #000080;
+            margin-right: 5px;
+            width: 100px;
+         border-radius: 4px;
+         border: none;
+         text-align: center;
+         font-size: large;
+         padding:10px 15px;    
+         transition: all 0.5s;
+         cursor: pointer;
+         box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+}
+
+button{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;  
+  top: 9px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover{
+  padding-right: 24px;
+  padding-left:8px;
+}
+
+button:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+        .result {
+            margin-top: 20px;
+        }
+        .steps {
+            margin-top: 10px;
+            padding-left: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h2>Decimal and Text to Binary Converter</h2>
+        <input type="text" id="numberInput" placeholder="Enter a number or text">
+        <button onclick="convertToBinary()">Convert</button>
+        <button onclick="resetFields()">Reset</button>
+        <div class="result" id="result"></div>
+        <div class="steps" id="steps"></div>
+    </div>
+
+    <script>
+        function convertToBinary() {
+            const input = document.getElementById("numberInput").value;
+            let resultDiv = document.getElementById("result");
+            let stepsDiv = document.getElementById("steps");
+
+            if (!input) {
+                resultDiv.textContent = "Please enter a valid input.";
+                stepsDiv.innerHTML = "";
+                return;
+            }
+
+            let binary = "";
+            let steps = [];
+
+            if (!isNaN(input)) {
+                // Input is a number
+                let num = parseInt(input);
+                while (num > 0) {
+                    let remainder = num % 2;
+                    binary = remainder + binary;
+                    steps.push(`${num} ÷ 2 = ${Math.floor(num / 2)}, remainder = ${remainder}`);
+                    num = Math.floor(num / 2);
+                }
+                resultDiv.textContent = `Binary (number): ${binary || 0}`;
+            } else {
+                // Input is text
+                for (let i = 0; i < input.length; i++) {
+                    let charCode = input.charCodeAt(i);
+                    steps.push(`Character '${input[i]}' to ASCII: ${charCode}`);
+                    
+                    let charBinary = "";
+                    let num = charCode;
+                    // Convert ASCII value to binary and log steps
+                    while (num > 0) {
+                        let remainder = num % 2;
+                        charBinary = remainder + charBinary;
+                        steps.push(`ASCII ${num} ÷ 2 = ${Math.floor(num / 2)}, remainder = ${remainder}`);
+                        num = Math.floor(num / 2);
+                    }
+
+                    charBinary = charBinary.padStart(8, '0'); // Pad binary to 8 bits
+                    binary += charBinary + ' ';
+                    steps.push(`Binary representation of ASCII ${charCode}: ${charBinary}`);
+                }
+                resultDiv.textContent = `Binary (text): ${binary.trim()}`;
+            }
+
+            stepsDiv.innerHTML = steps.map(step => `<li>${step}</li>`).join("");
+        }
+
+        function resetFields() {
+            document.getElementById("numberInput").value = "";
+            document.getElementById("result").textContent = "";
+            document.getElementById("steps").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
