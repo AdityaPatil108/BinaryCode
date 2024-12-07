@@ -49,6 +49,7 @@ Contributions are welcome! Fork the repository and submit a pull request.
 This project is licensed under the MIT License.
 
 ---
-
-### Made by CodeFusion_Solutions 
-## Aditya Zingade & Aditya Patil
+# Made By:
+## CodeFusion_Solutions
+### Aditya Zingade & Aditya Patil
+ 
