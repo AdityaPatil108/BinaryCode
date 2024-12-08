@@ -5,11 +5,14 @@ This project is a web-based tool for working with binary numbers, including:
 1. **Conversion**:
    - Decimal to Binary
    - Binary to Decimal
-2. **Binary Arithmetic Operations**:
+2. **Binary Calculate**:
    - Addition
    - Subtraction
    - Multiplication
    - Division
+3. **Binary Encoder and Decoder**:
+   - Text to Binary
+   - Binary to Text
 
 A perfect utility for developers, students, or anyone interested in binary computations.
 
