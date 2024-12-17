@@ -10823,3 +10823,20 @@ html {
     background-color: #a9a9a9;
     cursor: not-allowed;
   }
+
+  /* Ensure the image fits within its container */
+img {
+    max-width: 100%; /* Prevent the image from exceeding the container's width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra spaces below the image */
+    margin: 0 auto; /* Center the image horizontally */
+  }
+  
+  /* Specific styles for Number-System.png */
+  .vlabs-page-content img {
+    border: 2px solid #ddd; /* Optional: Add a light border */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+  }
+  
+  
