@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CodeFusion_Solutions-Octal Number System Converter</title>
+        <link rel="icon" href="images/a-3d-render-of-the-codefusion-solutions-logo-the-l-36ePFuKnSJWAgiv_Xwtyig-V3l0cWyETv2t3rQ-lfO9cQ.jpeg" type="image/icon type">
+        <link rel="stylesheet" href="Octal_Number.css">
+    </head>
+<body>
+    <div class="container">
+        <h1>Octal Number System Converter</h1>
+        <div class="converter">
+            <label for="decimalInput">Enter Decimal Number:</label>
+            <input type="number" id="decimalInput" placeholder="Enter decimal number">
+            <button onclick="convertToOctal()">Convert to Octal</button>
+        </div>
+        <div class="converter">
+            <label for="octalInput">Enter Octal Number:</label>
+            <input type="text" id="octalInput" placeholder="Enter octal number">
+            <button onclick="convertToDecimal()">Convert to Decimal</button>
+        </div>
+        <div class="controls">
+            <button onclick="resetFields()">Reset</button>
+        </div>
+        <div class="result">
+            <h2>Result:</h2>
+            <p id="result">-</p>
+            <h2>Steps:</h2>
+            <p id="steps">-</p>
+        </div>
+    </div>
+    <script src="Octal_Number.js"></script>
+</body>
+</html>
